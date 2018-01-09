@@ -1,0 +1,4 @@
+﻿<resources>
+    <string name="app_name">FoodMent</string>
+<string name="vmi"><![CDATA[Tabela oznaczeń bmi:\n< 16,0 – wygłodzenie \n16,0–16,99 – wychudzenie (spowodowane często przez anoreksję lub inną ciężką chorobę) \n17,0–18,49 – niedowagę \n18,5–24,99 – wartość prawidłową \n25,0–29,99 – nadwagę \n30,0–34,99 – I stopień otyłości \n35,0–39,99 – II stopień otyłości (otyłość kliniczna) \n≥ 40,0 – III stopień otyłości (otyłość skrajna)]]></string>
+</resources>
