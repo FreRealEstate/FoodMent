@@ -46,6 +46,10 @@ public class MenuGlowne extends AppCompatActivity {
     }
     private void goToPrzepisy() {
         Intent intent = new Intent(this, Przepisy.class);
+        Bundle bundle = getIntent().getExtras();
+        intent.putExtra("wzrost", bundle.getString("wzrost"));
+        intent.putExtra("waga", bundle.getString("waga"));
+        intent.putExtra("wiek", bundle.getString("wiek"));
         startActivity(intent);
 
     }

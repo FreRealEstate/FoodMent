@@ -39,6 +39,7 @@ public class Przepis extends AppCompatActivity {
         String nazwaPliku=bundle.getString("przepis");
         String nazwaPlikuBezRozsz=nazwaPliku.replace(".txt","");
         String ladnaNazwa="";
+        int czasPrzygotowania=0;
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
@@ -56,7 +57,7 @@ public class Przepis extends AppCompatActivity {
             while (!((mLine = reader.readLine()).equals( ";"))){
                 listaP.add(mLine);
             }
-
+            czasPrzygotowania=Integer.parseInt(reader.readLine());
 
             } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
@@ -71,7 +72,7 @@ public class Przepis extends AppCompatActivity {
                 }
             }
         }
-        nazwa.setText(ladnaNazwa);
+        nazwa.setText(ladnaNazwa+" ("+czasPrzygotowania+" min)");
         AssetManager assetManager = getAssets();
         InputStream is = null;
         try {
