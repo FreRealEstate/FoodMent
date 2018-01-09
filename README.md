@@ -1,3 +1,3 @@
 # FoodMent
 
-Wszystkie informacje w pliku README.docx
+Wszystkie informacje w pliku DO_ZROBIENIA.docx
