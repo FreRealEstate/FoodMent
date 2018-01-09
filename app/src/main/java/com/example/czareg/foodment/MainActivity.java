@@ -80,23 +80,23 @@ public class MainActivity extends AppCompatActivity {
         String filename = "config.txt";
         String filepath = "settings";
         File myExternalFile = new File(getExternalFilesDir(filepath), filename);
-       try {
-                FileOutputStream fos = new FileOutputStream(myExternalFile);
+        try {
+            FileOutputStream fos = new FileOutputStream(myExternalFile);
 
-           intent.putExtra("wzrost", wzrostTxt.getText().toString());
-           intent.putExtra("waga", wagaTxt.getText().toString());
-           intent.putExtra("wiek", wiekTxt.getText().toString());
+            intent.putExtra("wzrost", wzrostTxt.getText().toString());
+            intent.putExtra("waga", wagaTxt.getText().toString());
+            intent.putExtra("wiek", wiekTxt.getText().toString());
 
-               fos.write(wzrostTxt.getText().toString().getBytes());
-               fos.write("\n".getBytes());
-               fos.write(wagaTxt.getText().toString().getBytes());
-               fos.write("\n".getBytes());
-               fos.write(wiekTxt.getText().toString().getBytes());
+            fos.write(wzrostTxt.getText().toString().getBytes());
+            fos.write("\n".getBytes());
+            fos.write(wagaTxt.getText().toString().getBytes());
+            fos.write("\n".getBytes());
+            fos.write(wiekTxt.getText().toString().getBytes());
 
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         startActivity(intent);
 
