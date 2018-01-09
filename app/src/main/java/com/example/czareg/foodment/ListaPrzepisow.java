@@ -1,22 +1,22 @@
 package com.example.czareg.foodment;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class ListaPrzepisow extends AppCompatActivity {
     ArrayList<String> przepisyL;
+    ArrayList<String> przepisyLadneNazwy;
     private ListView list ;
     private ArrayAdapter<String> adapter ;
     @Override
@@ -27,21 +27,33 @@ public class ListaPrzepisow extends AppCompatActivity {
 
 
         przepisyL = new ArrayList<String>();
-            String [] lista;
-            try {
-                lista = getAssets().list("");
-                if (lista.length > 0) {
-                    for (String file : lista) {
-                        if(file.contains(".txt")) {
-                            przepisyL.add(file);
+        przepisyLadneNazwy = new ArrayList<String>();
+        String [] lista;
+        try {
+            lista = getAssets().list("");
+            if (lista.length > 0) {
+                for (String file : lista) {
+                    if (file.contains(".txt")) {
+                        przepisyL.add(file);
+                        BufferedReader reader = null;
+                        try {
+                            reader = new BufferedReader(
+                                    new InputStreamReader(getAssets().open(file), "UTF-8"));
+                            String ladnaNazwa = reader.readLine();
+                            przepisyLadneNazwy.add(ladnaNazwa);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
-            } catch (IOException e) {
-
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        adapter = new ArrayAdapter<String>(this, R.layout.wiersz, przepisyL);
+        adapter = new ArrayAdapter<String>(this, R.layout.wiersz, przepisyLadneNazwy);
 
         list.setAdapter(adapter);
 

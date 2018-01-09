@@ -3,7 +3,6 @@ package com.example.czareg.foodment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import java.text.DecimalFormat;
 
 public class Dieta extends AppCompatActivity {
