@@ -1,6 +1,8 @@
 ﻿Jajecznica po Węgiersku
 ;
-jaja
+jajka
+szynka
+cebula
 masło maślane
 śmietana
 sól

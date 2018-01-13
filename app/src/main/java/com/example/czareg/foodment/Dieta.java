@@ -25,7 +25,7 @@ public class Dieta extends AppCompatActivity {
             String bmiString = String.valueOf(dec.format(bmiDouble));
             String status="";
             if (bmiDouble < 18.5) {
-                status = "Masz niedowage";
+                status = "Masz niedowage. Zacznij jeść ty patyczaku!!";
             } else if (bmiDouble> 18.5 && bmiDouble < 25) {
                 status = "Prawidlowa waga";
             } else if (bmiDouble > 25 && bmiDouble < 30) {

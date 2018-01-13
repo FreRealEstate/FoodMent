@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 DataInputStream in = new DataInputStream(fis);
                 BufferedReader br =
                         new BufferedReader(new InputStreamReader(in));
-
-
                 strWzrost=br.readLine();
                 wzrostTxt.setText(strWzrost);
                 strWaga=br.readLine();

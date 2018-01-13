@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -19,8 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Map;
-import java.util.Random;
+import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -110,25 +109,31 @@ public class Przepisy extends AppCompatActivity {
 
         //-----------------------------UZYSKANIE LODOWKI---------------------------------
 
+        ArrayList<String> nazwyRzeczy=new ArrayList<>();
         Vector<Rzecz> lodowka=new Vector<Rzecz>();
-        File file=getApplicationContext().getFileStreamPath("lodowka.txt");
         String lineFromFile;
+        String filename = "lodowka.txt";
+        String filepath = "settings";
+        File myExternalFile = new File(getExternalFilesDir(filepath), filename);
 
-        if(file.exists()){
+        if(myExternalFile.exists()){
             try {
-                BufferedReader reader=new BufferedReader(new InputStreamReader(openFileInput("lodowka.txt")));
-                while((lineFromFile=reader.readLine())!=null){
+                FileInputStream fis = new FileInputStream(myExternalFile);
+                DataInputStream in = new DataInputStream(fis);
+                BufferedReader br =
+                        new BufferedReader(new InputStreamReader(in));
+                while((lineFromFile=br.readLine())!=null){
                     StringTokenizer tokens=new StringTokenizer(lineFromFile,";");
                     Rzecz rzecz=new Rzecz(tokens.nextToken(),tokens.nextToken(),tokens.nextToken(),tokens.nextToken());
                     lodowka.add(rzecz);
+                    nazwyRzeczy.add(rzecz.getNazwa());
                 }
-                reader.close();
-            } catch (FileNotFoundException e) {
-                e.getStackTrace();
+                in.close();
             } catch (IOException e) {
                 e.getStackTrace();
             }
         }
+
         //-----------------------------UZYSKANIE LODOWKI---------------------------------
 
         //-----------------------------UZYSKANIE BMI---------------------------------
@@ -139,7 +144,6 @@ public class Przepisy extends AppCompatActivity {
         double bmiDouble = waga / (wzrost * wzrost);
         DecimalFormat dec = new DecimalFormat("#0.00");
         String bmiString = String.valueOf(dec.format(bmiDouble));
-        //bmiDouble gotowe >30 nadwaga
         //-----------------------------UZYSKANIE BMI---------------------------------
 
 
@@ -148,13 +152,18 @@ public class Przepisy extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("HH");
         String date = df.format(Calendar.getInstance().getTime());
         int aktualnaGodzina=Integer.parseInt(date);
-        //Toast.makeText(Przepisy.this,date,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Przepisy.this,date,Toast.LENGTH_SHORT).show(); TESTOWANIE DATY 1/1
 
         //-----------------------------UZYSKANIE CZASU---------------------------------
 
         //-----------------------------UTWORZENIE MAPY PUNKTACJI---------------------------------
 
-        Map<Integer, PrzepisKlasa> mapaPunktacji = new TreeMap(Collections.reverseOrder());
+        SortedMap<Integer, PrzepisKlasa> mapaPunktacji = new TreeMap(Collections.reverseOrder());
+
+
+        //Vector<Integer> vPunktow=new Vector<>(); TESTOWANIE PROPOZYCJI 1/3
+        //Vector<String> vNazw=new Vector<>();
+
 
         for(int i=0;i<listaPrzepisow.size();i++){
             int punktacja=0;
@@ -171,17 +180,35 @@ public class Przepisy extends AppCompatActivity {
                 punktacja+=1;
             }
 
+            ArrayList<String> duplicatevalues=new ArrayList<>();
+            for (String finalval : nazwyRzeczy) {
+                if (listaPrzepisow.get(i).getListaSkladnikow().contains(finalval)) {
+                    duplicatevalues.add(finalval);
+                }
+            }
 
+            punktacja+=duplicatevalues.size();
+
+            //vNazw.add(listaPrzepisow.get(i).getNazwaZRoszerzeniem()); TESTOWANIE PROPOZYCJI 2/3
+            //vPunktow.add(punktacja);
             mapaPunktacji.put(punktacja,listaPrzepisow.get(i));
         }
 
 
         //-----------------------------UTWORZENIE MAPY PUNKTACJI---------------------------------
 
-        Random rand = new Random();
-        int i=rand.nextInt(listaPrzepisow.size());
 
-        intent.putExtra("przepis", listaPrzepisow.get(i).getNazwaZRoszerzeniem());
+
+        /* TESTOWANIE PROPOZYCJI 3/3
+        StringBuilder s=new StringBuilder();
+
+        for(int i=0;i<listaPrzepisow.size();i++){
+            s.append(vNazw.get(i)+" ");
+            s.append(vPunktow.get(i)+" ");
+        }
+        Toast.makeText(Przepisy.this,s.toString(),Toast.LENGTH_LONG).show();
+        */
+        intent.putExtra("przepis", mapaPunktacji.get(mapaPunktacji.firstKey()).getNazwaZRoszerzeniem());
         startActivity(intent);
 
     }
