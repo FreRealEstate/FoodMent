@@ -8,6 +8,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.io.*;
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +52,20 @@ public class MainActivity extends AppCompatActivity {
         gotowe.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                goToMenu();
+                try {
+                    int wzr = Integer.parseInt(wzrostTxt.getText().toString());
+                    int waga = Integer.parseInt(wagaTxt.getText().toString());
+                    int wiek = Integer.parseInt(wiekTxt.getText().toString());
+                    if (wzr >= 50 && wzr <= 230 && waga >= 30 && waga <= 300 && wiek >= 3 && wiek <= 100) {
+                        goToMenu();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Podaj poprawne dane!", Toast.LENGTH_SHORT).show();
+
+                    }
+                }catch(Exception e){
+                    Toast.makeText(MainActivity.this, "Podaj dane!", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
