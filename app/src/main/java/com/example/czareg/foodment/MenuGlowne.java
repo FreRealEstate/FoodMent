@@ -37,6 +37,14 @@ public class MenuGlowne extends AppCompatActivity {
                 goToDieta();
             }
         });
+        final Button listaZakupow = (Button) findViewById(R.id.listaZakupow);
+
+        listaZakupow.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                goToListaZakupow();
+            }
+        });
     }
 
     private void goToLodowka() {
@@ -59,6 +67,13 @@ public class MenuGlowne extends AppCompatActivity {
         intent.putExtra("wzrost", bundle.getString("wzrost"));
         intent.putExtra("waga", bundle.getString("waga"));
         intent.putExtra("wiek", bundle.getString("wiek"));
+        startActivity(intent);
+
+    }
+
+    private void goToListaZakupow() {
+        Intent intent = new Intent(this, ListaZakupow.class);
+        Bundle bundle = getIntent().getExtras();
         startActivity(intent);
 
     }

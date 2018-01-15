@@ -25,7 +25,8 @@
         <activity android:name=".Dieta" />
         <activity android:name=".ListaPrzepisow" />
         <activity android:name=".Przepis" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ListaZakupow"></activity>
     </application>
 
 </manifest>

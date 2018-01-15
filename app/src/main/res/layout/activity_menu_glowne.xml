@@ -42,4 +42,17 @@
         app:layout_constraintEnd_toEndOf="@+id/przepisy"
         app:layout_constraintStart_toStartOf="@+id/przepisy"
         app:layout_constraintTop_toBottomOf="@+id/przepisy" />
+
+    <Button
+        android:id="@+id/listaZakupow"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/buttonshape"
+        android:text="Lista Zakupów"
+        android:textColor="@color/textColorWhite"
+        app:layout_constraintEnd_toEndOf="@+id/dieta"
+        app:layout_constraintStart_toStartOf="@+id/dieta"
+        app:layout_constraintTop_toBottomOf="@+id/dieta" />
+
 </android.support.constraint.ConstraintLayout>
