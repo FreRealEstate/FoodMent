@@ -1,5 +1,7 @@
 package com.example.czareg.foodment;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,11 +20,12 @@ import java.io.InputStreamReader;
 import java.util.Vector;
 
 public class ListaZakupow extends AppCompatActivity {
-    private static final String TAG = Lodowka.class.getSimpleName();
+    private static final String TAG = ListaZakupow.class.getSimpleName();
     TextView zawartosc=null;
     TextView nazwa=null;
     Button dodawanie=null;
     Button usuwanie=null;
+    Button usunWszystko=null;
     public Vector<String> listaZakupow=null;
 
     @Override
@@ -45,6 +48,13 @@ public class ListaZakupow extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 btnDelData(v);
+            }
+        });
+        usunWszystko = (Button) findViewById(R.id.usunWszystko);
+        usunWszystko.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                btnDelAllData(v);
             }
         });
         nazwa = (TextView) findViewById(R.id.listaPrzepisow);
@@ -118,6 +128,38 @@ public class ListaZakupow extends AppCompatActivity {
             }
         }
     }
+
+    void btnDelAllData(View v) {
+        if(listaZakupow.size()>0) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(ListaZakupow.this);
+            builder.setMessage("Na pewno chcesz usunąć wszystko z listy?");
+            builder.setCancelable(true);
+            builder.setNegativeButton("Usuń wszystkie", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int g) {
+                    listaZakupow.clear();
+                    setTextToTextView();
+                    saveData();
+                    nazwa.setText("");
+                    Toast.makeText(ListaZakupow.this, "Usunieto!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            builder.setPositiveButton("Cofnij", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int g) {
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            }
+            else{
+            Toast.makeText(ListaZakupow.this, "Nie ma nic do usunięcia!", Toast.LENGTH_SHORT).show();
+
+        }
+        }
+
     void saveData(){
         String lineFromFile;
         String filename = "listaZakupow.txt";
