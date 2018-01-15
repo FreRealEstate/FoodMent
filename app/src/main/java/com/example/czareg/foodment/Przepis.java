@@ -10,11 +10,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 public class Przepis extends AppCompatActivity {
     TextView nazwa=null;
@@ -40,6 +45,32 @@ public class Przepis extends AppCompatActivity {
         String nazwaPlikuBezRozsz=nazwaPliku.replace(".txt","");
         String ladnaNazwa="";
         int czasPrzygotowania=0;
+
+        ArrayList<String> nazwyRzeczy=new ArrayList<>();
+        Vector<Rzecz> lodowka=new Vector<Rzecz>();
+        String lineFromFile;
+        String filename = "lodowka.txt";
+        String filepath = "settings";
+        File myExternalFile = new File(getExternalFilesDir(filepath), filename);
+
+        if(myExternalFile.exists()){
+            try {
+                FileInputStream fis = new FileInputStream(myExternalFile);
+                DataInputStream in = new DataInputStream(fis);
+                BufferedReader br =
+                        new BufferedReader(new InputStreamReader(in));
+                while((lineFromFile=br.readLine())!=null){
+                    StringTokenizer tokens=new StringTokenizer(lineFromFile,";");
+                    Rzecz rzecz=new Rzecz(tokens.nextToken(),tokens.nextToken(),tokens.nextToken(),tokens.nextToken());
+                    lodowka.add(rzecz);
+                    nazwyRzeczy.add(rzecz.getNazwa());
+                }
+                in.close();
+            } catch (IOException e) {
+                e.getStackTrace();
+            }
+        }
+
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
@@ -52,7 +83,12 @@ public class Przepis extends AppCompatActivity {
                 ladnaNazwa=mLine;
             }
             while (!((mLine = reader.readLine()).equals( ";"))){
-                listaS.add(mLine);
+                if(nazwyRzeczy.contains(mLine)){
+                    listaS.add(mLine+" (w lodówce)");
+                }else{
+                    listaS.add(mLine);
+                }
+
             }
             while (!((mLine = reader.readLine()).equals( ";"))){
                 listaP.add(mLine);
