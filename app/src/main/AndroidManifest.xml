@@ -19,14 +19,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuGlowne" />
-        <activity android:name=".Lodowka" />
-        <activity android:name=".Przepisy" />
-        <activity android:name=".Dieta" />
-        <activity android:name=".ListaPrzepisow" />
-        <activity android:name=".Przepis" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ListaZakupow"></activity>
+        <activity android:name=".MenuGlowne"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Lodowka"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Przepisy"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Dieta"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ListaPrzepisow"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Przepis"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ListaZakupow">
+            android:screenOrientation="portrait"
+        </activity>
     </application>
 
 </manifest>

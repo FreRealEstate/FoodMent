@@ -161,7 +161,6 @@ public class ListaZakupow extends AppCompatActivity {
         }
 
     void saveData(){
-        String lineFromFile;
         String filename = "listaZakupow.txt";
         String filepath = "settings";
         File myExternalFile = new File(getExternalFilesDir(filepath), filename);

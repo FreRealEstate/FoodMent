@@ -12,11 +12,9 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -128,19 +126,18 @@ public class Lodowka extends AppCompatActivity {
         for(int i=0;i<lodowka.size();i++){
             if(lodowka.get(i).getNazwa().equals(n)){
                 lodowka.remove(i);
-                setTextToTextView();
-                saveData();
-                nazwa.setText("");
-                ilosc.setText("");
-                jednostka.setText("");
-                data.setText("");
-                Toast.makeText(Lodowka.this,"Usunieto!",Toast.LENGTH_SHORT).show();
                 break;
             }
         }
+        setTextToTextView();
+        saveData();
+        nazwa.setText("");
+        ilosc.setText("");
+        jednostka.setText("");
+        data.setText("");
+        Toast.makeText(Lodowka.this,"Usunieto!",Toast.LENGTH_SHORT).show();
     }
     void saveData(){
-        String lineFromFile;
         String filename = "lodowka.txt";
         String filepath = "settings";
         File myExternalFile = new File(getExternalFilesDir(filepath), filename);

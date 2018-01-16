@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -89,10 +88,7 @@ public class Przepis extends AppCompatActivity {
         try {
             reader = new BufferedReader(
                     new InputStreamReader(getAssets().open(nazwaPliku), "UTF-8"));
-
-            // do reading, usually loop until end of file reading
             String mLine;
-            int i=1;
             while (!((mLine = reader.readLine()).equals( ";"))){
                 ladnaNazwa=mLine;
             }

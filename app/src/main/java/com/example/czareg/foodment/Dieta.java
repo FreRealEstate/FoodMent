@@ -33,7 +33,6 @@ public class Dieta extends AppCompatActivity {
             } else if (bmiDouble == 30 || bmiDouble > 30) {
                 status = "Jestes otyly! Schudnij!";
             }
-            String wynik=bmiString+"\n\n"+status;
             bmi.setText(bmiString);
             ocena.setText(status);
         }else{
