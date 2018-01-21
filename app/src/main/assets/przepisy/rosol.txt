@@ -1,11 +1,11 @@
 ﻿Domowy rosół z kurczaka
 ;
-2 duże uda i 1 korpus z kurczaka z szyją i skrzydełkami - ok. 2 kg mięsa (lub 1 kurczak o wadze około 2 kg)
-300 g wołowiny np. antrykotu, szpondra, oczka wołowego
-podroby: 10 serduszek i 5 żołądków kurzych lub 1 szyja indycza
-3 litry wody
-1 włoszczyzna: 2 marchewki, 1 pietruszka, 1 cebula, 2 gałązki natki pietruszki, kawałek selera, pora, liścia kapusty
-przyprawy: 1 łyżka soli morskiej, 3 ziarenka ziela angielskiego, 1 liść laurowy, 4 całe ziarenka pieprzu
+kurczak
+wołowina
+podroby
+woda
+włoszczyzna
+przyprawy
 ;
 1. Jeśli mamy całego kurczaka należy go pokroić na części - szyję, skrzydełka, uda, piersi i korpus (piersi odłożyć i wykorzystać na drugie danie, nie dodawać do rosołu).
 2. Mięso (kurczaka, wołowinę i podroby lub szyję indyka) opłukać, włożyć do dużego garnka i zalać zimną wodą. Posolić i zagotować na średnim ogniu.
@@ -13,4 +13,9 @@ przyprawy: 1 łyżka soli morskiej, 3 ziarenka ziela angielskiego, 1 liść laur
 4. W międzyczasie przygotować warzywa: marchewkę, pietruszkę i selera obrać (lub dla większego aromatu - tylko dokładnie umyć). Cebulę, pora i natkę opłukać (cebuli nie obierać, jej łuski nadadzą zupie ładnego koloru).
 5. Warzywa włożyć do rosołu i zagotować. Dodać przyprawy: ziele angielskie, liść laurowy i czarny pieprz. Zmniejszyć ogień i gotować na małym ogniu przez około 1 i 1/2 godziny.
 6. Rosół podawać gorący, z ugotowanym makaronem, posiekaną natką, pokrojoną na cienkie plasterki marchewką z rosołu oraz kawałkami mięsa z kurczaka.
+;
+120
+;
+obiad
+kolacja
 ;

@@ -11,7 +11,9 @@
         android:layout_width="200dp"
         android:layout_height="65dp"
         android:layout_marginTop="8dp"
+        android:theme="@style/Button"
         android:text="Zaproponuj przepis"
+        android:textColor="@color/textColorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +23,9 @@
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginTop="8dp"
+        android:theme="@style/Button"
         android:text="Przegladaj przepisy"
+        android:textColor="@color/textColorWhite"
         app:layout_constraintEnd_toEndOf="@+id/zaproponuj"
         app:layout_constraintStart_toStartOf="@+id/zaproponuj"
         app:layout_constraintTop_toBottomOf="@+id/zaproponuj" />
@@ -31,6 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:theme="@style/Button"
         android:text="-"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/przepisy"

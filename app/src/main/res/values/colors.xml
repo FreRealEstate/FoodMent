@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#A8213A</color>
     <color name="colorAccent">#E82D50</color>
 	<color name="colorPinkTrans">#E6E82D50</color>
+    <color name="textColor">#000000</color>
+    <color name="textColorWhite">#FFFFFF</color>
+    <color name="buttonhover">#FFFF6E89</color>
 
 </resources>

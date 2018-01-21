@@ -39,8 +39,17 @@ public class ListaPrzepisow extends AppCompatActivity {
                         try {
                             reader = new BufferedReader(
                                     new InputStreamReader(getAssets().open(file), "UTF-8"));
-                            String ladnaNazwa = reader.readLine();
-                            przepisyLadneNazwy.add(ladnaNazwa);
+                            String ladnaNazwa="";
+                            String mLine;
+                            while (!((mLine = reader.readLine()).equals( ";"))){
+                                ladnaNazwa=mLine;
+                            }
+                            while (!((mLine = reader.readLine()).equals( ";"))){
+                            }
+                            while (!((mLine = reader.readLine()).equals( ";"))){
+                            }
+                            int czasPrzygotowania=Integer.parseInt(reader.readLine());
+                            przepisyLadneNazwy.add(ladnaNazwa+" ("+czasPrzygotowania+" min)");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         } catch (IOException e) {

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FoodMent.iml" filepath="$PROJECT_DIR$/FoodMent.iml" />
+      <module fileurl="file://C:\Users\Kamil\Downloads\FoodMent-master (1)\FoodMent-master\FoodMent.iml" filepath="C:\Users\Kamil\Downloads\FoodMent-master (1)\FoodMent-master\FoodMent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FoodMent-master.iml" filepath="$PROJECT_DIR$/FoodMent-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Kamil\Downloads\FoodMent-master (1)\FoodMent-master\app\app.iml" filepath="C:\Users\Kamil\Downloads\FoodMent-master (1)\FoodMent-master\app\app.iml" />
     </modules>
   </component>
 </project>

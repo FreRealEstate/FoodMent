@@ -2,5 +2,5 @@
     android:id="@+id/Row"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textSize="16sp" >
-</TextView>
+    android:textColor="@color/textColor"
+    android:textSize="@dimen/normalTextSize"></TextView>

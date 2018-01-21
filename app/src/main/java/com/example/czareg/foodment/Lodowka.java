@@ -2,22 +2,25 @@ package com.example.czareg.foodment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class Lodowka extends AppCompatActivity {
+    private static final String TAG = Lodowka.class.getSimpleName();
+    Database foodmentDb;
     TextView zawartosc=null;
     TextView nazwa=null;
     TextView ilosc=null;
@@ -53,41 +56,50 @@ public class Lodowka extends AppCompatActivity {
         ilosc = (TextView)findViewById(R.id.ilosc);
         jednostka = (TextView) findViewById(R.id.jednostka);
         data = (TextView) findViewById(R.id.data);
+        foodmentDb = new Database(this,null,null,1);
         loadData();
     }
 
+
     void loadData(){
-        lodowka.clear();
-
-        File file=getApplicationContext().getFileStreamPath("lodowka.txt");
         String lineFromFile;
+        String filename = "lodowka.txt";
+        String filepath = "settings";
+        File myExternalFile = new File(getExternalFilesDir(filepath), filename);
 
-        if(file.exists()){
+        if(myExternalFile.exists()){
             try {
-                BufferedReader reader=new BufferedReader(new InputStreamReader(openFileInput("lodowka.txt")));
-                while((lineFromFile=reader.readLine())!=null){
+                FileInputStream fis = new FileInputStream(myExternalFile);
+                DataInputStream in = new DataInputStream(fis);
+                BufferedReader br =
+                        new BufferedReader(new InputStreamReader(in));
+
+                while((lineFromFile=br.readLine())!=null){
                     StringTokenizer tokens=new StringTokenizer(lineFromFile,";");
                     Rzecz rzecz=new Rzecz(tokens.nextToken(),tokens.nextToken(),tokens.nextToken(),tokens.nextToken());
+                    foodmentDb.addProduct(rzecz);
                     lodowka.add(rzecz);
                 }
-                reader.close();
+                in.close();
                 setTextToTextView();
 
-            } catch (FileNotFoundException e) {
-                e.getStackTrace();
             } catch (IOException e) {
                 e.getStackTrace();
+                Log.d(TAG, "IOException e");
             }
         }else {
             zawartosc.setText("Lodowka pusta. Dodaj przedmioty");
         }
     }
+
     void setTextToTextView(){
         String text="";
 
-        for(int i=0;i<lodowka.size();i++){
+        /*for(int i=0;i<lodowka.size();i++){
             text=text+lodowka.get(i).getNazwa() + " " +lodowka.get(i).getIlosc() + " " +lodowka.get(i).getJednostka() + " " +lodowka.get(i).getDataPrzydatnosci() + "\n";
-        }
+        }*/
+        // zamiana zawartości tabeli lodówka na String
+        text = foodmentDb.databaseToString();
         zawartosc.setText(text);
         if(lodowka.size()==0)
             zawartosc.setText("Lodowka pusta. Dodaj przedmioty");
@@ -99,43 +111,62 @@ public class Lodowka extends AppCompatActivity {
         String je=jednostka.getText().toString();
         String d=data.getText().toString();
 
-        Rzecz nowaRzecz=new Rzecz(n,il,je,d);
-        lodowka.add(nowaRzecz);
-        setTextToTextView();
-        saveData();
+        if( n != null && !n.isEmpty() && il != null && !il.isEmpty() && je != null && !je.isEmpty() && d != null && !d.isEmpty()){
+            Rzecz nowaRzecz=new Rzecz(n,il,je,d);
+            // dodanie rzeczy do tabeli
+            foodmentDb.addProduct(nowaRzecz);
+            lodowka.add(nowaRzecz);
+            setTextToTextView();
+            saveData();
+            nazwa.setText("");
+            ilosc.setText("");
+            jednostka.setText("");
+            data.setText("");
+            Toast.makeText(Lodowka.this,"Dodano!",Toast.LENGTH_SHORT).show();
 
+        } else{
+            Toast.makeText(Lodowka.this,"Uzupełnij wszystkie pola!",Toast.LENGTH_SHORT).show();
+        }
 
     }
     void btnDelData(View v) {
         String n=nazwa.getText().toString();
+        // usunięcie z tabeli
+        //foodmentDb.deleteProduct(n);
         for(int i=0;i<lodowka.size();i++){
             if(lodowka.get(i).getNazwa().equals(n)){
                 lodowka.remove(i);
-                setTextToTextView();
-                saveData();
-                //Toast.makeText(Lodowka.this,"Usunieto!",Toast.LENGTH_SHORT).show();
                 break;
-            }else{
-                Toast.makeText(Lodowka.this,"Brak produktu o podanej nazwie!",Toast.LENGTH_SHORT).show();
             }
-
         }
+        setTextToTextView();
+        saveData();
+        nazwa.setText("");
+        ilosc.setText("");
+        jednostka.setText("");
+        data.setText("");
+        Toast.makeText(Lodowka.this,"Usunieto!",Toast.LENGTH_SHORT).show();
     }
     void saveData(){
+        String filename = "lodowka.txt";
+        String filepath = "settings";
+        File myExternalFile = new File(getExternalFilesDir(filepath), filename);
         try{
-            FileOutputStream file=openFileOutput("lodowka.txt",MODE_PRIVATE);
-            OutputStreamWriter outputFile=new OutputStreamWriter(file);
+            FileOutputStream fos = new FileOutputStream(myExternalFile);
+
             for(int i=0;i<lodowka.size();i++)
             {
-                outputFile.write(lodowka.get(i).getNazwa() + ";" +lodowka.get(i).getIlosc() + ";" +lodowka.get(i).getJednostka() + ";" +lodowka.get(i).getDataPrzydatnosci() + "\n");
+                fos.write(lodowka.get(i).getNazwa().getBytes());
+                fos.write(";".getBytes());
+                fos.write(lodowka.get(i).getIlosc().getBytes());
+                fos.write(";".getBytes());
+                fos.write(lodowka.get(i).getJednostka().getBytes());
+                fos.write(";".getBytes());
+                fos.write(lodowka.get(i).getDataPrzydatnosci().getBytes());
+                fos.write("\n".getBytes());
             }
-            outputFile.flush();
-            outputFile.close();
 
-            //Toast.makeText(Lodowka.this,"Dodano!",Toast.LENGTH_SHORT).show();
-
-        } catch (FileNotFoundException e) {
-            e.getStackTrace();
+            fos.close();
         } catch (IOException e) {
             e.getStackTrace();
         }
