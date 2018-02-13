@@ -20,7 +20,6 @@ import java.util.Vector;
 
 public class Lodowka extends AppCompatActivity {
     private static final String TAG = Lodowka.class.getSimpleName();
-    Database foodmentDb;
     TextView zawartosc=null;
     TextView nazwa=null;
     TextView ilosc=null;
@@ -113,8 +112,6 @@ public class Lodowka extends AppCompatActivity {
 
         if( n != null && !n.isEmpty() && il != null && !il.isEmpty() && je != null && !je.isEmpty() && d != null && !d.isEmpty()){
             Rzecz nowaRzecz=new Rzecz(n,il,je,d);
-            // dodanie rzeczy do tabeli
-            foodmentDb.addProduct(nowaRzecz);
             lodowka.add(nowaRzecz);
             setTextToTextView();
             saveData();
